@@ -14,7 +14,8 @@
 * WRITE(* , *) the same as READ 
 
 **Fortran Code - 1**
-```fortran {.line-numbers}
+
+```fortran
 ! To calculate the average of a and b ! This is the annotation
       PROGRAM Example_1_1 ! This is the name of the fortran program
       REAL a, b, av1, av2 
