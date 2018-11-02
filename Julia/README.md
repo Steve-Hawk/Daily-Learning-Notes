@@ -39,3 +39,20 @@ $ sudo chown -R Name:staff .julia
 $ sudo chown -R Name:staff /JuliaPro-1.0.1.1.app
 ```
 在这两步完成后，按照Windows下相同的操作，即可设置正确的Jupyter内核。
+
+## Julia 安装完成后
+- Julia在安装完成后，可能会直接影响到原来Anaconda的安装内核（**都是用conda统一管理包环境**），直接结果就是GUI版本的Anaconda Navigator无法直接打开，Terminal环境下可以运行相关 **conda -h**命令；
+---
+- 解决办法：在终端使用一系列命令：
+ ```
+ $ conda update anaconda-navigator
+ $ anaconda-navigator --reset
+ $ conda update anaconda-client
+ $ conda update -f anaconda-client
+ 
+ ```
+  完成后，执行命令：
+```
+$ conda info --env
+```
+可以看到 **conda** 管理的环境下出现了Julia的package list
