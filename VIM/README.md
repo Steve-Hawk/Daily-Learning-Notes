@@ -11,11 +11,17 @@
 ```
 $ git clone https://github.com/vim/vim.git
 $ cd vim
-$ ./configure --with-features=huge --enable-python3interp --enable-pythoninterp --with-python-config-dir=/path/to/python2 --enable-rubyinterp --enable-luainterp --enable-perlinterp --with-python-config-dir=/path/to/python --enable-multibyte --enable-cscope --prefix=/path/to/vim/
+$ ./configure --with-features=huge --enable-pythoninterp --with-python-config-dir=/path/to/python2 --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-multibyte --enable-cscope --prefix=/path/to/vim/
 $ sudo make install
 ```
+
+> 这里由于VIM动态加载编译时添加的python选项，如果编译时选择了两种版本的python环境，则后续的VIM识别的过程中不会识别任何一种python版本,查看是否支持python的后续编译,直接影响到YoucompleteMe插件的安装过程
+
+```
+$ vim --version|grep python
+```
 ---
-**查找python安装路径-替换上面的路径**
+**查找python安装路径-替换上面的路径，只能选择一种Python**
 ```
 $ which python
 $ whihc python3
@@ -33,3 +39,5 @@ $ export PATH="\$PATH:/path/to/vim/bin:$PATH"
 $ vim
 $ :scriptname
 ```
+---
+**安装后续插件的过程建议通过Vundle插件管理**
