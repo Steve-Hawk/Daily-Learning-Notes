@@ -56,3 +56,14 @@ $ sudo chown -R Name:staff /JuliaPro-1.0.1.1.app
 $ conda info --env
 ```
 可以看到 **conda** 管理的环境下出现了Julia的package list
+
+- 由于VScode中的插件Julia暂时不支持1.0的版本，所以为了语法补全建议使用ATOM+Juno的Julia编译环境，另外不建议使用下面的命令在REPL下打开notebook()环境，不经超慢，而且不稳定，建议使用系统自带的Jupyter打开：
+
+```
+$ using IJulia
+$ notebook()
+
+$ jupyter notebook #支持Julia内核
+```
+
+
