@@ -179,4 +179,40 @@ map([A, B, C]) do x         # reserved key-word do使用
 end
 ```
 #### Do-Block Syntax for Function Arguments（回顾）
+---
 
+---
+## Control Flow
+### Compound Expressions
+- Evaluates several subexpressions in order, returning the value of the last subexpression as its value(可以连续执行多条命令，最后返回最后一个)
+
+```(julia)
+> z = begin             # 缩进不是默认要求
+           x = 1
+           y = 2
+           x + y
+       end
+
+> z = (x = 1; y = 2; x + y) # 也可以缩进
+```
+---
+## Conditional Evaluation
+- if-elseif-else判断结构，而且最后会默认返回判断语句最后的表达式
+
+- 只有**True False**在Julia结构中可以实现判断
+
+```(julia)
+> function test(x,y)
+           if x < y
+               relation = "less than"
+           elseif x == y
+               relation = "equal to"
+           else
+               relation = "greater than"
+           end
+           println("x is ", relation, " y.")
+       end
+
+> test(x, y) = println(x < y ? "x is less than y":x > y ? "x is greater than y" : "x is equal to y") # 直接进行short expression语法的判断
+```
+---
