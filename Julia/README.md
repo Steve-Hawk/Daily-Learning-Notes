@@ -216,3 +216,81 @@ end
 > test(x, y) = println(x < y ? "x is less than y":x > y ? "x is greater than y" : "x is equal to y") # 直接进行short expression语法的判断
 ```
 ---
+**Tips**
+> **where** keyword
+- where keyword creates a type that is an iterated union of other types, over all values of some variable. For example ```Vector{T} where T<:Real ``` includes all **Vectors** where the element type is some kind of Real number
+
+ > - 相当于给变量的数据类型施加了一定的限制
+
+```(julia)
+> Vector{T} where T>:Int 
+> Vector{T} where Int<:T<:Real #熟悉Julia的数据类型
+```
+###Module 调用(待解决)
+
+##Repeated Evaluation: Loops
+- 类似于Python中的迭代语法
+
+```(julia)
+> while i <= 5          #while迭代
+           println(i)
+           global i += 1
+  end
+  
+> for i in [1,4,0]      #for迭代
+           println(i)
+  end
+```
+- 无论是在for还是在while循环过程中，break是跳出整个循环过程，continue是跳出循环语句中剩余的语句块，进行下一次迭代过程
+
+### Multiple nested ```for``` loops
+```（julia）
+for i = 1:2, j = 3:4
+           println((i, j))
+end                     # 执行效果等价于
+
+for i = 1:n, j = 1:i 
+```
+-  只有一层最外层的循环，如果嵌入```break```语句会直接跳出所有的循环
+---
+**Tips**
+> ```:> <:``` --- 表示数据类型的含于情况的说明
+> ```isa(x, type) -> Bool``` --- 判断**x**是不是给定的变量类型
+
+---
+
+##Errors
+- ```try/catch``` statements also allow the Exception to be saved in a variable
+
+```(julia)
+> f(x) = try
+    sqrt(x)
+  catch       #捕捉到异常，然后运行下面的语句
+    sqrt(complex(x, 0))
+  end
+            #做比较
+            
+> sqrt_second(x) = try
+     sqrt(x[2])
+  catch y #将try引发的异常赋值给变量 y 
+     if isa(y, DomainError)
+         sqrt(complex(x[2], 0))
+     elseif isa(y, BoundsError)
+         sqrt(x)
+     end
+  end
+```
+- the symbol following catch will always be interpreted as a name for the exception
+
+- 在```Exception```被捕捉到以后，如果没有```catch```程序会直接报错
+
+- 建议写完整的```try/catch```语句做判断处理
+####```finally``` Clauses
+```(julia)
+> f = open("file")
+  try
+     # operate on file f
+  finally (保证后面的语句会被执行)
+     close(f)
+  end
+```
