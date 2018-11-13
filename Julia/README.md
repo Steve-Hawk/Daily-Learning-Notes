@@ -285,6 +285,7 @@ for i = 1:n, j = 1:i
 - 在```Exception```被捕捉到以后，如果没有```catch```程序会直接报错
 
 - 建议写完整的```try/catch```语句做判断处理
+
 ####```finally``` Clauses
 ```(julia)
 > f = open("file")
@@ -294,3 +295,4 @@ for i = 1:n, j = 1:i
      close(f)
   end
 ```
+---
