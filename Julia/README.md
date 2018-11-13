@@ -65,5 +65,118 @@ $ notebook()
 
 $ jupyter notebook #支持Julia内核
 ```
+## Numerical Literal Coefficients
+可以用来写简单的多项式的表达式（不建议用在复杂的表达式上-混淆函数的调用方式）
+```(julia)
+$ julia> x =3
+$ julia> x^2 -3x + 1
+$ julia> 1
+```
+---
+## Vectorized "dot" operator（Dot Syntax for Vectorized Functions）
+- Any Julia function **f** can be applied elementwise to any array(or other collection) with the syntax **f.(A)** 
 
+- 直接在原来的内存结构上进行单次的循环操作，并创建一个暂存的维数相同的内存结构
+
+```(julia)
+ > f.(args...) --- broadcast(f, args...) # f既可以是函数也可以是算符
+ > X.= ... --- broadcast!(identity,X,...)
+ > @. expression --- broadcast form
+ > a .+= b --- a .= a .+b
+ > X.(四则运算)
+```
+- 可使用在**user-defined operators**
+
+---
+## Complex Numbers
+- Global constant **im** is bound to represent complex number **i**
+
+```(julia)
+> sqrt(-1 + 0im)
+> complex(a,b) --- a + bim
+``` 
+---
+
+## String
+- 字符串的查找从**1**开始
+- Julia中的取值运算符**$**同***Linux*相同，可以作用在字符串或者表达式中
+- findfirst等函数找到第一个是**True**的值的***index**
+
+
+```(julia)
+> str = "Hello World"
+> str[1] --- 'H'
+> "Hello " * "World" --- "Hello World" 
+> $str --- "Hello World"
+> findfirst(predicate::Function, A)
+> findfirst(isequal('o'),"xylophone") --- 4
+```
+> '**+**' operator usually mean the operator is commutable for objects 
+
+---
+## Regular Expressions(正则表达式)
+- Find regular patterns in strings
+- Act as an input to help search effectively
+
+### 正则表达式简介（回顾以后）
+用来查找符合某些规则的字符串的需要所使用的描述这些规则的工具
+
+---
+## Functions
+```(julia)
+> function f(x,y)::Int8 #给定返回值的类型
+    x+y
+end             # traditional syntax
+> f(x,y) = x +y # assignment form
+> function hypot(x,y)       #使用语句块的方法可以使代码readable,不想Python强制
+    x = abs(x)
+    y = abs(y)
+    if x > y
+        r = y/x
+        return x*sqrt(1+r*x) 
+    end
+    if y == 0
+        return zero(x)
+    end
+    r =x/y
+    return y*sqrt(1+r*x)
+ end                        #每一个地方的语句块的结束必须有 end
+```
+- **"pass-by-sharing"** :只是为传递的参数建立了一个新的引用，如果函数参数是可变对象，在函数调用过程中可能会直接改变函数参数
+
+- The value returned by a function is the value of the last expression evaluated.(如果在函数定义中显式地申明了**return**，则返回**return**后面的语句，且作为结束的标志) 
+### Anonymous Functions
+- passing them to functions which take other functions as arguments
+
+```(julia)
+$ map(x -> x^2 + 2x - 1, [1,3,-1])
+```
+> 1. Julia中可迭代对象类同于Python中的元组，列表，字典；
+> 2. Julia中的自动Destructing Argument(可以通过传递可变的参数给一个函数)
+
+```(julia)
+bar(a,b,x...) = (a,b,x)
+
+map(x->begin                #  整体作为map的应用函数
+           if x < 0 && iseven(x)
+               return 0
+           elseif x == 0
+               return 1
+           else
+               return x
+           end
+       end,
+    [A, B, C])
+
+map([A, B, C]) do x         # reserved key-word do使用
+    if x < 0 && iseven(x)
+        return 0
+    elseif x == 0
+        return 1
+    else
+        return x
+    end
+end
+```
+#### Do-Block Syntax for Function Arguments（回顾）
 
