@@ -16,6 +16,7 @@ $ sudo make install
 ```
 
 > 这里由于VIM动态加载编译时添加的python选项，如果编译时选择了两种版本的python环境，则后续的VIM识别的过程中不会识别任何一种python版本,查看是否支持python的后续编译,直接影响到YoucompleteMe插件的安装过程
+> 上面介绍的方法在MacOS系统下的操作比较方便，貌似是由于不涉及Python-devel的原因，在Linux系统下，需要安装必要的python-devel的文件（Anaconda不支持头文件），VIM的安装过程中会寻找依赖的头文件
 
 ```
 $ vim --version|grep python
@@ -41,3 +42,9 @@ $ :scriptname
 ```
 ---
 **安装后续插件的过程建议通过Vundle插件管理**
+- 在使用YouCompleteMe的使用需要转到相应的bundle文件夹下面，用编译时选择的python选项，运行
+
+```(shell)
+python install.py
+```
+---
