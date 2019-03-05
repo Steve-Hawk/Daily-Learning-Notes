@@ -17,7 +17,19 @@ $ sudo make install
 
 > 这里由于VIM动态加载编译时添加的python选项，如果编译时选择了两种版本的python环境，则后续的VIM识别的过程中不会识别任何一种python版本,查看是否支持python的后续编译,直接影响到YoucompleteMe插件的安装过程
 
-> 上面介绍的方法在MacOS系统下的操作比较方便，貌似是由于不涉及Python-devel的原因，在Linux系统下，需要安装必要的python-devel的文件（Anaconda不支持头文件），VIM的安装过程中会寻找依赖的头文件
+> 上面介绍的方法在MacOS系统下的操作比较方便，貌似是由于不涉及Python-devel的原因，在Linux系统下，需要安装必要的python-devel的文件（Anaconda不支持头文件），VIM的安装过程中会寻找依赖的头文件(貌似在MacOS系统下也会有一定的问题)
+> 上面介绍的方法在MacOS系统下的操作比较方便，貌似是由于不涉及Python-devel的原因，在Linux系统下，需要安装必要的python-devel的文件（Anaconda不支持头文件），VIM的安装过程中会寻找依赖的头文件(貌似在MacOS系统下也会有一定的问题)
+
+- 比较快捷的方法：
+
+'''(shell)
+$ alias python=python3
+$ brew install vim
+$ unaliase python
+'''
+> 上述步骤完成之后，需要重新编译安装YoucompleteM
+
+
 
 ```
 $ vim --version|grep python
