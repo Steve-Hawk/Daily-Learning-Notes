@@ -22,11 +22,11 @@ $ sudo make install
 
 - 比较快捷的方法：
 
-'''(shell)
+```(shell)
 $ alias python=python3
 $ brew install vim
 $ unaliase python
-'''
+```
 > 上述步骤完成之后，需要重新编译安装YoucompleteM
 
 
